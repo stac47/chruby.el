@@ -47,6 +47,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 'eshell)
 
 (defvar chruby-current-ruby-binary-path nil
   "reflects the path to the current 'ruby' executable.
@@ -98,7 +99,7 @@
       (setenv "PATH" (concat new-binaries-for-path ":" (getenv "PATH"))))
     (dolist (binary new-binaries)
       (add-to-list 'exec-path binary))
-    (setq eshell-path-env (getenv "PATH"))
+    (eshell-set-path (getenv "PATH"))
     (setq chruby-current-ruby-binary-path new-binaries)))
 
 (defun chruby-set-gemhome (gemhome gempath)
